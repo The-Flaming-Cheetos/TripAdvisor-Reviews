@@ -1,8 +1,8 @@
 # Reviews API Endpoints
-* [Create Reviews] (#CREATE)
-* [Read Reviews] (#READ)
-* [Update helpful flag] (#UPDATE)
-* [Delete Review] (#DELETE)
+* [Create Reviews]
+* [Read Reviews] 
+* [Update helpful flag]
+* [Delete Review]
 
 ## CREATE
     Users are allowed to create Reviews
