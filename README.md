@@ -1,39 +1,32 @@
-# Project Name
+# Questions and Answers API Endpoints
+* [Create Reviews] (#CREATE)
+* [Read Reviews] (#READ)
+* [Update helpful flag] (#UPDATE)
+* [Delete Review] (#DELETE)
 
-> Project description
-
-## Related Projects
-
-  - https://github.com/teamName/repo
-  - https://github.com/teamName/repo
-  - https://github.com/teamName/repo
-  - https://github.com/teamName/repo
-
-## Table of Contents
-
-1. [Usage](#Usage)
-1. [Requirements](#requirements)
-1. [Development](#development)
-
-## Usage
-
-> Some usage instructions
-
-## Requirements
-
-An `nvmrc` file is included if using [nvm](https://github.com/creationix/nvm).
-
-- Node 6.13.0
-- etc
-
-## Development
-
-### Installing Dependencies
-
-From within the root directory:
-
-```sh
-npm install -g webpack
-npm install
-```
-
+## CREATE
+    Users are allowed to create Reviews
+### End Points:
+    POST /api/attractions/:attractionid
+### Path Parameters 
+    attractionid - integer; 
+### Default Response: 
+    200 CREATED
+`[
+ {
+    "attractionID": 1,
+    "reviewId": 1,
+    "username": "Delbert29",
+    "userLocation": "Sethhaven, Maryland",
+    "contributions": 1,
+    "profilePhoto": "http://placeimg.com/640/480/people",
+    "title": "Guinea Ridge Reverse-engineered 24/7 Gorgeous index Account De-engineered Health index SQL Liaison",
+    "dateOfReview": "2020-11-13T08:00:00.000Z",
+    "reviewText": "Gorgeous Tanzania Caribbean 5th engineer Triple-buffered Account methodologies innovate Car tertiary Account Integrated Awesome invoice plum Factors exploit hierarchy Unbranded quantify HDD service-desk mission-critical Gloves Books payment Cambridgeshire Legacy Keyboard PCI Producer Licensed users payment Money Tasty Multi-tiered Crest Handmade Shoes cyan Global database circuit Paradigm Grocery Louisiana tangible Unbranded",
+    "reviewLanguage": "Spanish",
+    "travelerRating": 3,
+    "dateOfExperience": "2020-11-12T08:00:00.000Z"
+  }
+]`
+### Fail Response
+    Unable to post review: 400 BAD REQUEST
