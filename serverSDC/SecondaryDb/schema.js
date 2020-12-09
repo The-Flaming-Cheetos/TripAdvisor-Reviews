@@ -1,11 +1,11 @@
 ottoman.model('attractions', {
-  attractionID: 'number',
+  attractionId: 'number',
   attractionName: 'string'
 });
 
 
 ottoman.model('users', {
-  userID: 'number',
+  userId: 'number',
   username: 'string',
   userLocation: 'string',
   contributions: 'number',
@@ -14,9 +14,9 @@ ottoman.model('users', {
 
 
 ottoman.model('reviews', {
-  reviewID: 'number',
-  userID: 'number',
-  attractionID: 'number',
+  reviewId: 'number',
+  userId: 'number',
+  attractionId: 'number',
   helpful: 'number',
   title: 'string',
   reviewText: 'string',

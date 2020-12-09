@@ -5,12 +5,12 @@ CREATE DATABASE tripAdvisor;
 USE tripAdvisor;
 
 CREATE TABLE attractions (
-  attractionID INT NOT NULL PRIMARY KEY,
+  attractionId INT NOT NULL PRIMARY KEY,
   attractionName VARCHAR(250)
 );
 
 CREATE TABLE users (
-  userID INT PRIMARY KEY,
+  userId INT PRIMARY KEY,
   username VARCHAR(50) NOT NULL,
   userLocation VARCHAR(250),
   contributions INT,
@@ -19,9 +19,9 @@ CREATE TABLE users (
 
 
 CREATE TABLE reviews (
-  reviewID int PRIMARY KEY,
-  userID int NOT NULL,
-  attractionID int NOT NULL,
+  reviewId int PRIMARY KEY,
+  userId int NOT NULL,
+  attractionId int NOT NULL,
   helpful INT,
   title  VARCHAR(200),
   reviewText text NOT NULL,
@@ -31,8 +31,8 @@ CREATE TABLE reviews (
   dateOfReview DATE,
   reviewLanguage VARCHAR(200),
   photos VARCHAR(200),
-  FOREIGN KEY (userID) REFERENCES users(userID),
-  FOREIGN KEY (attractionID) REFERENCES attractions(attractionID)
+  FOREIGN KEY (userId) REFERENCES users(userId),
+  FOREIGN KEY (attractionId) REFERENCES attractions(attractionId)
 );
 
 
