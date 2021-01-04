@@ -6,7 +6,7 @@ var maxAttraction = 10000000;
 
 //Create Users
 var createUsers = (userId, maxUser) => {
-  var userRecord = `${userId},${name.firstName()} ${name.lastName()},${address.state()} ${address.country()},${random.number({min: 1, max: 100})},https://tripadvisor-sdc-bkt.s3-us-west-1.amazonaws.com/userprofile/${random.number({min: 0, max: 59})}.jpg,userprofile\n`;
+  var userRecord = `${userId},"${name.firstName()} ${name.lastName()}","${random.words(1)} ${random.words(2)}",${random.number({min: 1, max: 100})},"https://tripadvisor-sdc-bkt.s3-us-west-1.amazonaws.com/userprofile/${random.number({min: 0, max: 59})}.jpg",userprofile\n`;
   if(userId === maxUser) {
     return 'userId,username,userLocation,contributions,profilePhoto,type\n';
   } else {
@@ -16,7 +16,7 @@ var createUsers = (userId, maxUser) => {
 
 //create attraction
 var createAttractions = (attractionId, maxAttraction) => {
-  var attractionRecord = `${attractionId},${address.streetName()},attraction\n`;
+  var attractionRecord = `${attractionId},"${random.words(3)}",attraction\n`;
   if(attractionId === maxAttraction) {
     return 'attractionId,attractionName,type\n';
   } else {
@@ -27,12 +27,12 @@ var createAttractions = (attractionId, maxAttraction) => {
 //Create Reviews
 var createReviews =(reviewId, attractionId, reviewIdStart) => {
   var dateOfExperience = random.number({min: 1995, max: 2019})+'-'+random.number({min: 1, max: 12})+'-'+random.number({min: 1, max: 27});
-  var dateOfReview = random.number({min: 1995, max: 2019})+'-'+random.number({min: 1, max: 12})+'-'+random.number({min: 1, max: 30});
+  var dateOfReview = random.number({min: 1995, max: 2019})+'-'+random.number({min: 1, max: 12})+'-'+random.number({min: 1, max: 26});
   var travelerTypes = ["Families", "Couples", "Solo", "Business", "Friends"];
   var reviewLanguages = ["English", "Chinese (Trad.)", "Japanese", "French", "German", "Spanish", "Italian", "Danish", "Korean", "Hebrew"];
   var userId = random.number({min: 0, max:maxUser});
 
-  var review =`${reviewId},${userId},${attractionId},0,"${random.words(5)}","${random.words(10)}",${random.number({min: 1, max:5})},${travelerTypes[random.number({min: 0, max: 4})]},${dateOfExperience},${dateOfReview},${reviewLanguages[random.number({min: 0, max: 9})]},https://tripadvisor-sdc-bkt.s3-us-west-1.amazonaws.com/attractions/${random.number({min: 0, max: 99})}.jpg,reviews\n`;
+  var review =`${reviewId},${userId},${attractionId},0,"${random.words(5)}","${random.words(10)}",${random.number({min: 1, max:5})},${travelerTypes[random.number({min: 0, max: 4})]},${dateOfExperience},${dateOfReview},"${reviewLanguages[random.number({min: 0, max: 9})]}",https://tripadvisor-sdc-bkt.s3-us-west-1.amazonaws.com/attractions/${random.number({min: 0, max: 99})}.jpg,reviews\n`;
 
     //load header for the first line, hence load when reviewId = 0
     if (reviewId === reviewIdStart) {
@@ -129,7 +129,7 @@ function createCSV(writer, maxLimit, callback, callbackArg, decrement) {
     do {
       data=callback(i, maxLimit, callbackArg);
       i=decrement>0?i-decrement:i-1;
-      if (i <= 0) {
+      if (i < 0) {
         // Last time!
         writer.write(data);
       } else {
@@ -137,8 +137,8 @@ function createCSV(writer, maxLimit, callback, callbackArg, decrement) {
         // Don't pass the callback, because we're not done yet.
         ok = writer.write(data);
       }
-    } while (i > 0 && ok);
-    if (i > 0) {
+    } while (i >= 0 && ok);
+    if (i >= 0) {
       // Had to stop early!
       // Write some more once it drains.
       writer.once('drain', write);
@@ -152,10 +152,10 @@ function createCSV(writer, maxLimit, callback, callbackArg, decrement) {
 
 //create CSV for Users
 // var usersWriteStream = fs.createWriteStream('./files/usersData.csv');
-// createCSV(usersWriteStream, maxUser, createUsers);
-// //create CSV for attraction
+// createCSV(usersWriteStream, maxUser+1, createUsers);
+// // //create CSV for attraction
 // var attrWriteStream = fs.createWriteStream('./files/attractionData.csv');
-// createCSV(attrWriteStream, maxAttraction, createAttractions);
+// createCSV(attrWriteStream, maxAttraction+1, createAttractions);
 //create CSV for Reviews
 var reviewWriteStream = fs.createWriteStream('./files/reviewsData.csv');
 writeReviewsToCSV(reviewWriteStream, maxAttraction, 36, 50000001);

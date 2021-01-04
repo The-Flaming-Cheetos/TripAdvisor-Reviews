@@ -1,6 +1,7 @@
 const express = require('express');
 const app = express();
 const {getReviews, getMetrics, getPopularMentions} = require('./apiFuncs.js');
+//serverSDC/primaryDb/model.js
 
 app.use(express.urlencoded({ extended: false }));
 app.use(express.json());

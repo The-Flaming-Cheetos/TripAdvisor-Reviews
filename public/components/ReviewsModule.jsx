@@ -83,6 +83,7 @@ class ReviewsModule extends React.Component {
     axios.get(`/api/attractions/${attractionID}/reviews`,
     {params: filters})
     .then((res) => {
+      console.log(res.data);
       this.setState({
         reviewsList: res.data
       });
